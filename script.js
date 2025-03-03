@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
         terminalGrowthRate: document.getElementById('terminalGrowthRate'),
         discountRate: document.getElementById('discountRate'),
         growthRate: document.getElementById('growthRate'),
-        sharesOutstanding: document.getElementById('sharesOutstanding')
+        sharesOutstanding: document.getElementById('sharesOutstanding'),
+        stockTicker: document.getElementById('stockTicker')
     };
 
     // Get all output elements
@@ -120,4 +121,85 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add event listener for current price changes
     outputs.currentPrice.addEventListener('change', calculateDCF);
+
+    // Summary Modal functionality
+    const modal = document.getElementById('summaryModal');
+    const summaryBtn = document.getElementById('generateSummary');
+    const closeBtn = document.querySelector('.close-button');
+    const downloadBtn = document.getElementById('downloadSummary');
+
+    // Open modal when Generate Summary is clicked
+    summaryBtn.addEventListener('click', function() {
+        updateSummary();
+        modal.style.display = 'block';
+    });
+
+    // Close modal when X is clicked
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Update summary content with current values
+    function updateSummary() {
+        // Get current date
+        const today = new Date();
+        const dateStr = today.toLocaleDateString();
+        
+        // Update summary fields
+        document.getElementById('summaryTicker').textContent = inputs.stockTicker.value || 'TKR';
+        document.getElementById('summaryDate').textContent = `Date: ${dateStr}`;
+        document.getElementById('summaryFCF').textContent = inputs.freeCashFlow.value || '-';
+        
+        // Get selected text from dropdowns
+        const terminalGrowthSelect = inputs.terminalGrowthRate;
+        const terminalGrowthText = terminalGrowthSelect.options[terminalGrowthSelect.selectedIndex].text;
+        document.getElementById('summaryTerminalGrowth').textContent = terminalGrowthText;
+        
+        const discountRateSelect = inputs.discountRate;
+        const discountRateText = discountRateSelect.options[discountRateSelect.selectedIndex].text;
+        document.getElementById('summaryDiscountRate').textContent = discountRateText;
+        
+        document.getElementById('summaryGrowthRate').textContent = `${inputs.growthRate.value || '-'}%`;
+        document.getElementById('summaryShares').textContent = inputs.sharesOutstanding.value || '-';
+        
+        // Results
+        document.getElementById('summaryCurrentPrice').textContent = `$${outputs.currentPrice.value || '-'}`;
+        document.getElementById('summaryIntrinsicValue').textContent = outputs.intrinsicValue.textContent;
+        document.getElementById('summaryImpliedGrowth').textContent = outputs.impliedGrowth.textContent;
+        
+        // Determine valuation status
+        let valuationStatus = 'Fairly Valued';
+        const currentPrice = parseFloat(outputs.currentPrice.value);
+        const intrinsicValue = parseFloat(outputs.intrinsicValue.textContent.replace('$', ''));
+        
+        if (!isNaN(currentPrice) && !isNaN(intrinsicValue)) {
+            const ratio = intrinsicValue / currentPrice;
+            if (ratio < 0.8) {
+                valuationStatus = 'Overvalued (Too Optimistic)';
+            } else if (ratio > 1.2) {
+                valuationStatus = 'Undervalued (Too Pessimistic)';
+            }
+        }
+        
+        document.getElementById('summaryValuation').textContent = valuationStatus;
+    }
+
+    // Download summary as image
+    downloadBtn.addEventListener('click', function() {
+        const summaryElement = document.querySelector('.summary-container');
+        
+        html2canvas(summaryElement).then(canvas => {
+            const link = document.createElement('a');
+            link.download = `${inputs.stockTicker.value || 'Stock'}_DCF_Analysis.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    });
 }); 

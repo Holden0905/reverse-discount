@@ -196,4 +196,144 @@ input::placeholder {
 .value {
     color: #00ff00;
     font-weight: bold;
+}
+
+/* Export Summary Styles */
+.actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.action-button {
+    background-color: #00ff00;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.action-button:hover {
+    background-color: #00cc00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #1a1a1a;
+    margin: 5% auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.2);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #00ff00;
+}
+
+/* Summary Content Styles */
+.summary-container {
+    background-color: #121212;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.ticker-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.date-display {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.summary-section {
+    margin-bottom: 25px;
+}
+
+.summary-section h3 {
+    color: #00ff00;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+}
+
+.summary-row.highlight {
+    background-color: rgba(0, 255, 0, 0.05);
+    padding: 12px 8px;
+    border-radius: 4px;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.summary-row.highlight span:last-child {
+    color: #00ff00;
+}
+
+.summary-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #666;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    text-align: center;
 } 

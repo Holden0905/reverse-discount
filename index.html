@@ -80,6 +80,76 @@
             </div>
         </div>
     </div>
+    <div class="actions">
+        <button id="generateSummary" class="action-button">Generate Summary</button>
+    </div>
+    
+    <!-- Summary Modal -->
+    <div id="summaryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="summaryContent">
+                <h2>DCF Analysis Summary</h2>
+                <div class="summary-container">
+                    <div class="summary-header">
+                        <div class="ticker-display" id="summaryTicker">TKR</div>
+                        <div class="date-display" id="summaryDate">Date: </div>
+                    </div>
+                    <div class="summary-section">
+                        <h3>Inputs</h3>
+                        <div class="summary-row">
+                            <span>Free Cash Flow ($M):</span>
+                            <span id="summaryFCF">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Terminal Growth Rate:</span>
+                            <span id="summaryTerminalGrowth">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Discount Rate:</span>
+                            <span id="summaryDiscountRate">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Year 1-10 Growth Rate:</span>
+                            <span id="summaryGrowthRate">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shares Outstanding (M):</span>
+                            <span id="summaryShares">-</span>
+                        </div>
+                    </div>
+                    <div class="summary-section">
+                        <h3>Results</h3>
+                        <div class="summary-row highlight">
+                            <span>Current Share Price:</span>
+                            <span id="summaryCurrentPrice">-</span>
+                        </div>
+                        <div class="summary-row highlight">
+                            <span>Estimated Intrinsic Value:</span>
+                            <span id="summaryIntrinsicValue">-</span>
+                        </div>
+                        <div class="summary-row highlight">
+                            <span>Implied Growth Rate:</span>
+                            <span id="summaryImpliedGrowth">-</span>
+                        </div>
+                        <div class="summary-row highlight">
+                            <span>Valuation:</span>
+                            <span id="summaryValuation">-</span>
+                        </div>
+                    </div>
+                    <div class="summary-footer">
+                        <p>Analysis generated using Reverse DCF Calculator</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="downloadSummary" class="action-button">Download as Image</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Include html2canvas library for screenshot functionality -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 

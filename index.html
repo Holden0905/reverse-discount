@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCF Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <header>
+            <h1>Reverse DCF Calculator</h1>
+        </header>
+        <div class="input-section">
+            <div class="input-group ticker-group">
+                <label>Stock Ticker</label>
+                <input type="text" id="stockTicker" value="" placeholder="TKR" maxlength="5">
+            </div>
+            <div class="input-group">
+                <label>Free Cash Flow (Trailing 12 Months in $ Millions)</label>
+                <input type="number" id="freeCashFlow" value="" placeholder="1000">
+            </div>
+            
+            <div class="input-group">
+                <label>Terminal Growth Rate</label>
+                <select id="terminalGrowthRate">
+                    <option value="0.01">Below Normal (1%)</option>
+                    <option value="0.02">Normal Growth (2%)</option>
+                    <option value="0.03">Above Normal (3%)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Discount Rate</label>
+                <select id="discountRate">
+                    <option value="0.06">Very Low Risk (6%)</option>
+                    <option value="0.08">Low Risk (8%)</option>
+                    <option value="0.10">Normal Risk (10%)</option>
+                    <option value="0.12">High Risk (12%)</option>
+                    <option value="0.14">Very High Risk (14%)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Year 1-10 Growth Rate (%)</label>
+                <input type="number" id="growthRate" value="" placeholder="5">
+            </div>
+
+            <div class="input-group">
+                <label>Shares Outstanding (Millions)</label>
+                <input type="number" id="sharesOutstanding" value="" placeholder="100">
+            </div>
+        </div>
+
+        <div class="result-section">
+            <h3>FREE CASH FLOW METHOD</h3>
+            <div class="result-group">
+                <label>Current Share Price</label>
+                <div class="value">$<input type="number" id="currentPrice" value="" placeholder="0"></div>
+            </div>
+            <div class="result-group">
+                <label>Estimated Intrinsic Value</label>
+                <div class="value" id="intrinsicValue">$83</div>
+            </div>
+            <div class="result-group">
+                <label>Implied Growth Rate</label>
+                <div class="value" id="impliedGrowth">4.0%</div>
+            </div>
+        </div>
+
+        <div class="valuation-meter">
+            <div class="meter-container">
+                <div class="meter-bar"></div>
+                <div class="meter-marker" id="valuationMarker"></div>
+            </div>
+            <div class="meter-labels">
+                <span>Too Optimistic</span>
+                <span>Reasonable</span>
+                <span>Too Pessimistic</span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

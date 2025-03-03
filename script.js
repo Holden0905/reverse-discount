@@ -202,4 +202,26 @@ document.addEventListener('DOMContentLoaded', function() {
             link.click();
         });
     });
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        body.classList.add('light-theme');
+        themeToggle.checked = true;
+    }
+
+    // Add event listener for theme toggle
+    themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+            body.classList.add('light-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.classList.remove('light-theme');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
 }); 

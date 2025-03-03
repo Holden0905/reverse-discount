@@ -10,6 +10,15 @@
     <div class="calculator-container">
         <header>
             <h1>Reverse DCF Calculator</h1>
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" />
+                    <div class="slider round">
+                        <span class="moon">🌙</span>
+                        <span class="sun">☀️</span>
+                    </div>
+                </label>
+            </div>
         </header>
         <div class="input-section">
             <div class="input-group ticker-group">
@@ -83,6 +92,12 @@
     <div class="actions">
         <button id="generateSummary" class="action-button">Generate Summary</button>
     </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© Helios Finance 2025</p>
+        </div>
+    </footer>
     
     <!-- Summary Modal -->
     <div id="summaryModal" class="modal">

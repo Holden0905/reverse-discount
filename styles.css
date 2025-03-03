@@ -29,14 +29,149 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #e0e0e0;
     padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Variables */
+:root {
+    --bg-color: #0a0a0a;
+    --container-bg: #121212;
+    --section-bg: #1a1a1a;
+    --input-bg: #2a2a2a;
+    --text-color: #e0e0e0;
+    --accent-color: #00ff00;
+    --accent-glow: rgba(0, 255, 0, 0.3);
+    --border-color: #333;
+    --highlight-bg: rgba(0, 255, 0, 0.05);
+    --input-placeholder: #777;
+    --meter-gradient: linear-gradient(to right, #ff0055, #444, #00ff00);
+}
+
+/* Light Theme Colors */
+body.light-theme {
+    --bg-color: #f5f5f5;
+    --container-bg: #ffffff;
+    --section-bg: #f0f0f0;
+    --input-bg: #ffffff;
+    --text-color: #333333;
+    --accent-color: #0066cc;
+    --accent-glow: rgba(0, 102, 204, 0.2);
+    --border-color: #dddddd;
+    --highlight-bg: rgba(0, 153, 0, 0.05);
+    --input-placeholder: #777;
+    --meter-gradient: linear-gradient(to right, #ff4d4d, #e0e0e0, #0066cc);
+}
+
+/* Apply theme variables */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.calculator-container {
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+header h1 {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-glow);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.input-section, .result-section {
+    background-color: var(--section-bg);
+    border: 1px solid var(--border-color);
+}
+
+.input-group label {
+    color: var(--accent-color);
+}
+
+.input-group input, .input-group select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+input::placeholder {
+    color: var(--input-placeholder);
+    opacity: 1;
+}
+
+/* Toggle Switch Styles */
+.theme-switch-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #333;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+    z-index: 1;
+}
+
+.sun, .moon {
+    font-size: 16px;
+    z-index: 0;
+}
+
+input:checked + .slider {
+    background-color: #0066cc;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 .input-section {
-    background-color: #1a1a1a;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
-    border: 1px solid #333;
 }
 
 .input-group {
@@ -46,21 +181,14 @@ body {
 .input-group label {
     display: block;
     margin-bottom: 5px;
-    color: #00ff00;
-    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
 }
 
 .input-group input,
 .input-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background-color: #2a2a2a;
-    color: #fff;
     transition: all 0.3s ease;
 }
 
@@ -76,20 +204,14 @@ select {
     cursor: pointer;
 }
 
-input::placeholder {
-    color: #555;
-}
-
 .result-section {
-    background-color: #1a1a1a;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
-    border: 1px solid #333;
 }
 
 .result-section h3 {
-    color: #00ff00;
+    color: var(--accent-color);
     font-size: 1.2rem;
     margin-bottom: 15px;
     letter-spacing: 1px;
@@ -104,15 +226,15 @@ input::placeholder {
 }
 
 .result-group:nth-child(2) {
-    background-color: rgba(0, 255, 0, 0.1);
+    background-color: rgba(128, 128, 128, 0.1);
 }
 
 .result-group:nth-child(3) {
-    background-color: rgba(0, 255, 0, 0.05);
+    background-color: rgba(128, 128, 128, 0.05);
 }
 
 .result-group:nth-child(4) {
-    background-color: rgba(0, 255, 0, 0.02);
+    background-color: rgba(128, 128, 128, 0.02);
 }
 
 .valuation-meter {
@@ -121,7 +243,7 @@ input::placeholder {
 
 .meter-container {
     height: 20px;
-    background: linear-gradient(to right, #ff0055, #444, #00ff00);
+    background: var(--meter-gradient);
     position: relative;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -147,11 +269,11 @@ input::placeholder {
 }
 
 .meter-labels span:first-child {
-    color: #ff0055;
+    color: var(--bg-color) === '#0a0a0a' ? '#ff0055' : '#ff4d4d';
 }
 
 .meter-labels span:last-child {
-    color: #00ff00;
+    color: var(--accent-color);
 }
 
 .ticker-group input {
@@ -164,14 +286,14 @@ input::placeholder {
     display: block;
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid #444;
-    color: #00ff00;
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--accent-color);
     padding: 5px;
 }
 
 .ticker-group input:focus {
-    border-bottom: 2px solid #00ff00;
-    box-shadow: 0 4px 6px -6px rgba(0, 255, 0, 0.6);
+    border-bottom: 2px solid var(--accent-color);
+    box-shadow: 0 4px 6px -6px var(--accent-glow);
 }
 
 .ticker-group label {
@@ -194,7 +316,7 @@ input::placeholder {
 }
 
 .value {
-    color: #00ff00;
+    color: var(--accent-color);
     font-weight: bold;
 }
 
@@ -205,7 +327,7 @@ input::placeholder {
 }
 
 .action-button {
-    background-color: #00ff00;
+    background-color: var(--accent-color);
     color: #000;
     border: none;
     padding: 10px 20px;
@@ -219,8 +341,8 @@ input::placeholder {
 }
 
 .action-button:hover {
-    background-color: #00cc00;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    background-color: var(--bg-color) === '#0a0a0a' ? '#00cc00' : '#0055aa';
+    box-shadow: 0 0 10px var(--accent-glow);
 }
 
 /* Modal Styles */
@@ -262,7 +384,7 @@ input::placeholder {
 }
 
 .close-button:hover {
-    color: #00ff00;
+    color: var(--accent-color);
 }
 
 /* Summary Content Styles */
@@ -286,8 +408,8 @@ input::placeholder {
 .ticker-display {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #00ff00;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-glow);
 }
 
 .date-display {
@@ -300,7 +422,7 @@ input::placeholder {
 }
 
 .summary-section h3 {
-    color: #00ff00;
+    color: var(--accent-color);
     margin-bottom: 10px;
     border-bottom: 1px solid #333;
     padding-bottom: 5px;
@@ -322,7 +444,7 @@ input::placeholder {
 }
 
 .summary-row.highlight span:last-child {
-    color: #00ff00;
+    color: var(--accent-color);
 }
 
 .summary-footer {
@@ -336,4 +458,29 @@ input::placeholder {
 .modal-actions {
     margin-top: 20px;
     text-align: center;
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.footer p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+body.light-theme .footer {
+    color: #777;
 } 
